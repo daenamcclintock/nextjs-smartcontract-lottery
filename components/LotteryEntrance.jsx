@@ -14,6 +14,7 @@ export default function LotteryEntrance() {
     const raffleAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null
 
     // State hooks
+    // https://stackoverflow.com/questions/58252454/react-hooks-using-usestate-vs-just-variables
     const [entranceFee, setEntranceFee] = useState("0")
     const [numberOfPlayers, setNumberOfPlayers] = useState("0")
     const [recentWinner, setRecentWinner] = useState("0")
@@ -100,10 +101,10 @@ export default function LotteryEntrance() {
     }
 
     // Probably could add some error handling
-    const handleSuccess = async (transaction) => {
-        await transaction.wait(1)
+    const handleSuccess = async (tx) => {
+        await tx.wait(1)
         updateUIValues()
-        handleNewNotification(transaction)
+        handleNewNotification(tx)
     }
 
     return (
